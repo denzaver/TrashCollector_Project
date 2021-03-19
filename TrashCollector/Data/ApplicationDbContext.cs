@@ -4,11 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TrashCollector.Data.Migrations;
 
 namespace TrashCollector.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Employees> Employees { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -22,17 +25,16 @@ namespace TrashCollector.Data
             new IdentityRole
             {
                 Name = "Employee",
-                NormalizedName = "Employee"
+                NormalizedName = "EMPLOYEE"
             }
             );
 
-            base.OnModelCreating(builder);
             builder.Entity<IdentityRole>()
             .HasData(
             new IdentityRole
             {
                 Name = "Customer",
-                NormalizedName = "Customer"
+                NormalizedName = "CUSTOMER"
             }
             );
         }
