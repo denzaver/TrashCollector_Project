@@ -25,7 +25,20 @@ namespace TrashCollector.Data
                 NormalizedName = "Employee"
             }
             );
+
+            base.OnModelCreating(builder);
+            builder.Entity<IdentityRole>()
+            .HasData(
+            new IdentityRole
+            {
+                Name = "Customer",
+                NormalizedName = "Customer"
+            }
+            );
         }
+
+
+
 
     }
 }
