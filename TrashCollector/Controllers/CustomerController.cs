@@ -29,6 +29,12 @@ namespace TrashCollector.Controllers
             userId).SingleOrDefault();
 
             //var customers = _context.Customers.ToList();
+
+            if (customer == null)
+            {
+                return RedirectToAction(nameof(Create));
+            }
+
             return View(customer);
         }
 
@@ -64,7 +70,6 @@ namespace TrashCollector.Controllers
                 return View();
             }
         }
-
         // GET: CustomerController/Edit/5
         public ActionResult Edit(int id)
         {
