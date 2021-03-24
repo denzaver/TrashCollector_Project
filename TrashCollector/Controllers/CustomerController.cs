@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TrashCollector.Data;
 using TrashCollector.Models;
@@ -22,7 +23,13 @@ namespace TrashCollector.Controllers
         // GET: CustomerController
         public ActionResult Index()
         {
-            return View();
+
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId ==
+            userId).SingleOrDefault();
+
+            //var customers = _context.Customers.ToList();
+            return View(customer);
         }
 
         // GET: CustomerController/Details/5
@@ -57,16 +64,19 @@ namespace TrashCollector.Controllers
         // GET: CustomerController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var findId = _context.Customers.Find(id);
+            return View(findId);
         }
 
         // POST: CustomerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Customer customer)
         {
             try
             {
+                _context.Customers.Add(customer);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -78,13 +88,14 @@ namespace TrashCollector.Controllers
         // GET: CustomerController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var deleteId = _context.Customers.Find(id);
+            return View(deleteId);
         }
 
         // POST: CustomerController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Customer customer)
         {
             try
             {
