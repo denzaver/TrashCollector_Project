@@ -35,7 +35,8 @@ namespace TrashCollector.Controllers
         // GET: CustomerController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var customerInfo = _context.Customers.Find(id);
+            return View(customerInfo);
         }
 
         // GET: CustomerController/Create
@@ -51,6 +52,9 @@ namespace TrashCollector.Controllers
         {
             try
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                customer.IdentityUserId = userId;
+
                 _context.Customers.Add(customer);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
@@ -99,6 +103,8 @@ namespace TrashCollector.Controllers
         {
             try
             {
+                _context.Customers.Remove(customer);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
