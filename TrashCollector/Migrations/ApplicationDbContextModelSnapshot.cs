@@ -48,15 +48,15 @@ namespace TrashCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d4634567-4532-40fb-9b72-611c2af82ff4",
-                            ConcurrencyStamp = "319d0675-4c69-46db-945b-abe7fcb5602e",
+                            Id = "d3c65813-5501-4030-a38d-12c633729baf",
+                            ConcurrencyStamp = "fa40f4ba-559c-4c11-85cf-e07b4ce25057",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
-                            Id = "8585898e-5246-4180-862c-e0e550900800",
-                            ConcurrencyStamp = "54bfcffb-9cbd-4f1e-890a-db97e40f8f66",
+                            Id = "32515800-35b8-4b61-be68-efed368f7c8a",
+                            ConcurrencyStamp = "351dd84d-038b-4c5f-b8ce-66cbae440802",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -250,9 +250,6 @@ namespace TrashCollector.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IdentityIserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -285,15 +282,24 @@ namespace TrashCollector.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IdentityIserId")
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IdentityUswerId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<DateTime>("PickupDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PickupStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdentityUswerId");
+                    b.HasIndex("IdentityUserId");
 
                     b.ToTable("Employees");
                 });
@@ -351,16 +357,16 @@ namespace TrashCollector.Migrations
 
             modelBuilder.Entity("TrashCollector.Models.Customer", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUswer")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
                         .HasForeignKey("IdentityUserId");
                 });
 
             modelBuilder.Entity("TrashCollector.Models.Employee", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUswer")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
-                        .HasForeignKey("IdentityUswerId");
+                        .HasForeignKey("IdentityUserId");
                 });
 #pragma warning restore 612, 618
         }

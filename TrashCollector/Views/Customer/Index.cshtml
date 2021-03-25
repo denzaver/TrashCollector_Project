@@ -38,10 +38,7 @@
                 @Html.DisplayNameFor(model => model.TemporaryPauseDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdentityIserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdentityUswer)
+                @Html.DisplayNameFor(model => model.IdentityUser)
             </th>
             <th></th>
         </tr>
@@ -74,10 +71,7 @@
                 @Html.DisplayFor(modelItem => item.TemporaryPauseDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdentityIserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdentityUswer.Id)
+                @Html.DisplayFor(modelItem => item.IdentityUser.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

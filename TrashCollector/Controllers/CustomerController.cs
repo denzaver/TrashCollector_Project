@@ -24,11 +24,11 @@ namespace TrashCollector.Controllers
         public ActionResult Index()
         {
 
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _context.Customers.Where(c => c.IdentityUserId ==
-            userId).SingleOrDefault();
+            //var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var customer = _context.Customers.Where(c => c.IdentityUserId ==
+            //userId).SingleOrDefault();
 
-            //var customers = _context.Customers.ToList();
+            var customer = _context.Customers.ToList();
 
             if (customer == null)
             {
@@ -84,7 +84,10 @@ namespace TrashCollector.Controllers
         {
             try
             {
-                _context.Customers.Add(customer);
+                //var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                //customer.IdentityUserId = userId;
+
+                _context.Customers.Update(customer);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }

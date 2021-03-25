@@ -20,13 +20,14 @@ namespace TrashCollector.Models
         public DateTime PickupDate { get; set; }
         public DateTime AdditionalPickDate { get; set; }
         public DateTime TemporaryPauseDate { get; set; }
-        public int AmountOwed { get;}
+        public string PickupConfirmation { get; }
+        public int Balance { get;}
 
 
 
         [ForeignKey("IdentityUser")]
-        public string IdentityIserId { get; set; }
-        public IdentityUser IdentityUswer { get; set; }
-        public string IdentityUserId { get; internal set; }
+        public string IdentityUserId { get; set; }
+        public IdentityUser IdentityUser { get; set; }
+
     }
 }
