@@ -29,6 +29,10 @@ namespace TrashCollector.Controllers
                 return RedirectToAction(nameof(Create));
             }
 
+
+            string currentDayOfWeek = DateTime.Now.DayOfWeek.ToString();
+            //var custimerZipCode = _context.Customers.Where(c => c.ZipCode == employee.ZipCode && c.PickupDate == currentDayOfWeek).ToList();
+
             return View(employee);
         }
 
@@ -73,7 +77,7 @@ namespace TrashCollector.Controllers
         // POST: EmployeeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Employee employee)
         {
             try
             {
